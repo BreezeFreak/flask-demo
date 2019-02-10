@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Product Admin - Dashboard HTML Template</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+    <!-- https://fonts.google.com/specimen/Roboto -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome.min.css') }}"/>
+    <!-- https://fontawesome.com/ -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}"/>
+    <!-- https://getbootstrap.com/ -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/templatemo-style.css') }}">
+    
+</head>
+
+<body id="reportsPage">
+    <div class="" id="home">
+        <nav class="navbar navbar-expand-xl">
+            <div class="container h-100">
+                <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-bars tm-nav-icon"></i>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mx-auto h-100">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">
+                                <i class="fas fa-shopping-cart"></i>
+                                购物
+                            </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/records">
+                                <i class="far fa-file-alt"></i>
+                                记录
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/accounts">
+                                <i class="far fa-user"></i>
+                                账号
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link d-block" href="/logout/">
+                                {{ session['username'] }}, <b>登出</b>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </nav>
+        <div class="container mt-5">
+            <!-- row -->
+            <div class="row tm-content-row">
+                <div class="col-12 tm-block-col">
+                        <h2 class="tm-block-title">交易记录</h2>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">时间</th>
+                                    <th scope="col">消费/充值</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for key,value in record %}
+                                    <tr>
+                                        <td>
+                                            {{key}}
+                                        </td>
+                                        <td>
+                                            {{value}}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+<!-- https://jquery.com/download/ -->
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <!-- https://jquery.com/download/ -->
+    <script src="{{ url_for('static', filename='js/moment.min.js') }}"></script>
+    <!-- https://momentjs.com/ -->
+    <script src="{{ url_for('static', filename='js/Chart.min.js') }}"></script>
+    <!-- http://www.chartjs.org/docs/latest/ -->
+    <!-- https://getbootstrap.com/ -->
+    <script src="{{ url_for('static', filename='js/tooplate-scripts.js') }}"></script>
+    <script>
+        Chart.defaults.global.defaultFontColor = 'white';
+        let ctxLine,
+            ctxBar,
+            ctxPie,
+            optionsLine,
+            optionsBar,
+            optionsPie,
+            configLine,
+            configBar,
+            configPie,
+            lineChart;
+        barChart, pieChart;
+        // DOM is ready
+        $(function () {
+            drawLineChart(); // Line Chart
+            drawBarChart(); // Bar Chart
+            drawPieChart(); // Pie Chart
+
+            $(window).resize(function () {
+                updateLineChart();
+                updateBarChart();                
+            });
+        })
+    </script>
+</body>
+
+</html>
